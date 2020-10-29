@@ -1,0 +1,90 @@
+12:16:34.527 [JavaFX Application Thread] DEBUG GameApplication      - Logger initialized
+12:16:34.542 [JavaFX Application Thread] DEBUG GameApplication      - Logging settings
+Title: Journey down the den
+Version: 0.2
+Width: 1920
+Height: 1080
+Fullscreen: true
+Intro: false
+Menus: false
+Profiling: false
+Single step:false
+App Mode: DEVELOPER
+Menu Key: ESCAPE
+Stage Style: DECORATED
+Scene Factory: class com.almasb.fxgl.scene.SceneFactory
+Dialog Factory: class com.almasb.fxgl.ui.FXGLDialogFactory
+UI Factory: class com.almasb.fxgl.ui.FXGLUIFactory
+Notification Service: class com.almasb.fxgl.gameplay.notification.XboxNotificationView
+Exception Handler: class com.almasb.fxgl.app.FXGLExceptionHandler
+12:16:34.542 [JavaFX Application Thread] DEBUG GameApplication      - Starting FXGL
+12:16:34.548 [JavaFX Application Thread] INFO  FXGL                 - FXGL-0.5.4 on DESKTOP
+12:16:34.549 [JavaFX Application Thread] INFO  FXGL                 - Source code and latest versions at: https://github.com/AlmasB/FXGL
+12:16:34.549 [JavaFX Application Thread] INFO  FXGL                 -              Join the FXGL chat at: https://gitter.im/AlmasB/FXGL
+12:16:34.549 [JavaFX Application Thread] DEBUG FXGL                 - FXGL started
+12:16:34.549 [JavaFX Application Thread] DEBUG FXGL                 - Initializing FXGL
+12:16:34.607 [JavaFX Application Thread] DEBUG AssetLoader          - Loading from disk: /assets/ui/cursors/fxgl_default.png
+12:16:34.681 [JavaFX Application Thread] DEBUG AssetLoader          - Loading from disk: /assets/ui/fonts/VarelaRound-Regular.ttf
+12:16:35.015 [JavaFX Application Thread] DEBUG MainWindow           - Creating a JavaFX scene
+12:16:35.046 [JavaFX Application Thread] DEBUG MainWindow           - Target settings size: 1920.0 x 1080.0
+12:16:35.046 [JavaFX Application Thread] DEBUG MainWindow           - Scaled scene size:    1920.0 x 1080.0
+12:16:35.046 [JavaFX Application Thread] DEBUG MainWindow           - Scaled ratio: (1.0, 1.0)
+12:16:35.058 [JavaFX Application Thread] DEBUG AssetLoader          - Loading from disk: /assets/ui/css/fxgl_dark.css
+12:16:35.061 [JavaFX Application Thread] DEBUG AssetLoader          - Loading from disk: /assets/textures/JDTD_icon.png
+12:16:35.070 [JavaFX Application Thread] DEBUG MainWindow           - Opening main window
+12:16:35.243 [JavaFX Application Thread] DEBUG MainWindow           - Window border size: (16.0, 39.0)
+12:16:35.244 [JavaFX Application Thread] DEBUG MainWindow           - Scaled size: 1920.0 x 1080.0
+12:16:35.244 [JavaFX Application Thread] DEBUG MainWindow           - Scaled ratio: (1.0, 1.0)
+12:16:35.244 [JavaFX Application Thread] DEBUG MainWindow           - Scene size: 1920.0 x 1080.0
+12:16:35.244 [JavaFX Application Thread] DEBUG MainWindow           - Stage size: 1936.0 x 1119.0
+12:16:35.275 [ForkJoinPool.commonPool-worker-9] DEBUG FS                   - Loaded DesktopFSService
+12:16:35.275 [ForkJoinPool.commonPool-worker-9] DEBUG FXGL                 - Loading FXGL system data
+12:16:35.281 [ForkJoinPool.commonPool-worker-9] DEBUG DesktopFSService     - Reading from: system\fxgl.bundle
+12:16:35.289 [ForkJoinPool.commonPool-worker-9] DEBUG Bundle               - Logging bundle: FXGL
+12:16:35.291 [ForkJoinPool.commonPool-worker-9] DEBUG Bundle               - FXGL.offline.timer.version.check=2020-10-28T10:30:23.135
+12:16:35.292 [ForkJoinPool.commonPool-worker-9] DEBUG FXGL                 - Initializing state machine and application states
+12:16:35.294 [ForkJoinPool.commonPool-worker-9] DEBUG AssetLoader          - Loading from disk: /assets/ui/cursors/fxgl_default.png
+12:16:35.298 [ForkJoinPool.commonPool-worker-9] DEBUG AssetLoader          - Loading from disk: /assets/ui/cursors/fxgl_default.png
+12:16:35.308 [ForkJoinPool.commonPool-worker-9] DEBUG AssetLoader          - Loading from cache: /assets/ui/fonts/VarelaRound-Regular.ttf
+12:16:35.311 [ForkJoinPool.commonPool-worker-9] DEBUG AssetLoader          - Loading from disk: /assets/ui/cursors/fxgl_default.png
+12:16:35.313 [ForkJoinPool.commonPool-worker-9] DEBUG GameScene            - Game scene initialized: 1920x1080
+12:16:35.319 [ForkJoinPool.commonPool-worker-9] DEBUG GameWorld            - Game world initialized
+12:16:35.367 [ForkJoinPool.commonPool-worker-9] DEBUG PhysicsWorld         - Physics world initialized: appHeight=1080, physics.ppm=50,0
+12:16:35.399 [ForkJoinPool.commonPool-worker-9] DEBUG Input                - Registered new binding: Pause - Esc
+12:16:35.432 [JavaFX Application Thread] DEBUG FXGL                 - Running preInit()
+12:16:35.434 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Screenshot - P
+12:16:35.435 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Dev Options - CTRL+0
+12:16:35.435 [JavaFX Application Thread] DEBUG Input                - Registered new binding: System info dump - CTRL+9
+12:16:35.435 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Restart - CTRL+R
+12:16:35.435 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Show grid - F
+12:16:35.436 [JavaFX Application Thread] INFO  FXGL                 - FXGL initialization took: 0,887 sec
+12:16:35.436 [JavaFX Application Thread] DEBUG LoopRunner           - Starting loop
+12:16:35.437 [JavaFX Application Thread] DEBUG StartupState         - STARTUP
+12:16:35.438 [JavaFX Application Thread] DEBUG GameApplication      - Starting new game
+12:16:35.438 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+12:16:35.439 [JavaFX Application Thread] DEBUG AssetLoader          - Loading from disk: /assets/ui/css/fxgl_dark.css
+12:16:35.443 [JavaFX Application Thread] DEBUG AppStateMachine      - StartupState -> LoadingState
+12:16:35.448 [FXGL Background Thread 1 ] DEBUG InitAppTask          - Clearing previous game
+12:16:35.448 [FXGL Background Thread 1 ] DEBUG GameWorld            - Clearing game world
+12:16:35.448 [FXGL Background Thread 1 ] DEBUG PhysicsWorld         - Clearing physics world
+12:16:35.448 [FXGL Background Thread 1 ] DEBUG GameScene            - Clearing game scene
+12:16:35.449 [FXGL Background Thread 1 ] DEBUG InitAppTask          - Initializing Game
+12:16:35.477 [FXGL Background Thread 1 ] DEBUG AssetLoader          - Loading from disk: /assets/textures/mapTest.png
+12:16:35.499 [FXGL Background Thread 1 ] DEBUG GameScene            - Creating render group for layer: DEFAULT(100000)
+12:16:35.501 [FXGL Background Thread 1 ] DEBUG AssetLoader          - Loading from disk: /assets/textures/down_hero1.png
+12:16:35.503 [FXGL Background Thread 1 ] DEBUG AssetLoader          - Loading from disk: /assets/textures/Hero1_full.png
+12:16:35.505 [FXGL Background Thread 1 ] DEBUG AssetLoader          - Loading from disk: /assets/textures/goblin_down.png
+12:16:35.655 [FXGL Background Thread 1 ] DEBUG AudioPlayer          - Playing music com.almasb.fxgl.audio.Music@1b6da71
+12:16:35.657 [FXGL Background Thread 1 ] DEBUG InitAppTask          - Initializing Physics
+12:16:35.657 [FXGL Background Thread 1 ] DEBUG InitAppTask          - Initializing UI
+12:16:35.657 [FXGL Background Thread 1 ] DEBUG AssetLoader          - Loading from disk: /assets/ui/cursors/cursor.png
+12:16:35.662 [FXGL Background Thread 1 ] DEBUG InitAppTask          - Initialization Complete
+12:16:35.662 [FXGL Background Thread 1 ] INFO  InitAppTask          - Game initialization took: 0,214 sec
+12:16:35.666 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+12:16:35.666 [JavaFX Application Thread] DEBUG AssetLoader          - Loading from disk: /assets/ui/css/fxgl_dark.css
+12:16:35.670 [JavaFX Application Thread] DEBUG AppStateMachine      - LoadingState -> PlayState
+12:16:38.862 [JavaFX Application Thread] DEBUG FXGL                 - Exiting FXGL
+12:16:38.862 [JavaFX Application Thread] DEBUG FXGL                 - Shutting down background threads
+12:16:38.862 [JavaFX Application Thread] DEBUG FXGL                 - Saving FXGL system data
+12:16:38.865 [JavaFX Application Thread] DEBUG DesktopFSService     - Writing to: system\fxgl.bundle
+12:16:38.868 [JavaFX Application Thread] DEBUG FXGL                 - Closing logger and exiting JavaFX

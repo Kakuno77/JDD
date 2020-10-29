@@ -5,16 +5,19 @@
  */
 package fxglExemple;
 
+
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.entity.Entities;
 import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.entity.components.IrremovableComponent;
 import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.settings.GameSettings;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -31,114 +34,190 @@ public class BasicGameApp extends GameApplication {
 	@SuppressWarnings("unused")
 	private Entity lineOfUI;
 
+	@SuppressWarnings("unused")
+	private Entity grid;
+
+	@SuppressWarnings("unused")
+	private Entity info_hero1;
+//To implement
+//	private Entity info_hero2;
+//	private Entity info_hero3;
+
+	private Entity goblin;
+	private Entity casesAroundRight;
+	private Entity casesAroundLeft;
+	private Entity casesAroundUp;
+	private Entity casesAroundDown;
+	boolean gridState = false;
+
 	@Override
 	protected void initSettings(GameSettings settings) {
-//A fix
-		settings.setFullScreenAllowed(true);
-		settings.setManualResizeEnabled(true);
 		settings.setWidth(1920); // 791
 		settings.setHeight(1080); // 575
+		settings.setFullScreenAllowed(true);
+		settings.setManualResizeEnabled(true);
 		settings.setTitle("Journey down the den");
-		settings.setVersion("0.1");
-//Implémenter plus tard si on a le temps
+		settings.setVersion("0.2");
+		settings.setAppIcon("JDTD_icon.png");
+//To implement 
 //		settings.setIntroEnabled(true);
 	}
 
 	@Override
 	protected void initGame() {
-		background = Entities.builder().at(0, 0).viewFromTexture("mapTest.png").buildAndAttach(getGameWorld());
-
-		player = Entities.builder().at(60, 60).viewFromTexture("down_character.png").buildAndAttach(getGameWorld());
-		// Board for scene
-		for (int i = 0; i < 1920;) {
-			for (int j = 0; j < 920;) {
-				tileX = Entities.builder().at(i, j).viewFromNode(new Rectangle(41, 2, Color.DIMGREY))
-						.buildAndAttach(getGameWorld());
-				tileY = Entities.builder().at(i, j).viewFromNode(new Rectangle(2, 41, Color.DIMGREY))
-						.buildAndAttach(getGameWorld());
-				j += 40;
-			}
-			i += 40;
-		}
-		lineOfUI = Entities.builder().at(0, 918).viewFromNode(new Rectangle(1920, 2, Color.BLACK))
+		background = Entities.builder().at(0, 0).with(new IrremovableComponent()).viewFromTexture("mapTest.png")
 				.buildAndAttach(getGameWorld());
-		// Repeatable theme
+		player = Entities.builder().at(0, 0).viewFromTexture("down_hero1.png").buildAndAttach(getGameWorld());
+		lineOfUI = Entities.builder().at(0, 901).viewFromNode(new Rectangle(1920, 200, Color.GREY))
+				.buildAndAttach(getGameWorld());
+		info_hero1 = Entities.builder().at(5, 905).viewFromTexture("Hero1_full.png").buildAndAttach(getGameWorld());
+		goblin = Entities.builder().at(400, 90).viewFromTexture("goblin_down.png").buildAndAttach(getGameWorld());
+
+//To implement
+//		info_hero2 = Entities.builder().at(319, 910).viewFromTexture("Hero1_full.png").buildAndAttach(getGameWorld());
+//		info_hero3 = Entities.builder().at(633, 910).viewFromTexture("Hero1_full.png").buildAndAttach(getGameWorld());
+
+// 		Repeatable theme
 		getAudioPlayer().loopBGM("town_theme.mp3");
 	}
 
 	@Override
 	protected void initInput() {
 		Input input = getInput();
-//test pas fini d'être écrit
-//		input.getMousePositionUI();
-//		
-//		input.addAction(new UserAction("Move towards") {
+
+		input.addAction(new UserAction("Show grid") {
+			@Override
+			protected void onAction() {
+				if (gridState == false) {
+					for (int i = 0; i < 1920;) {
+						for (int j = 0; j < 900;) {
+							Entities.builder().at(i, j).viewFromNode(new Rectangle(61, 2, Color.DIMGREY))
+									.buildAndAttach(getGameWorld());
+							Entities.builder().at(i, j).viewFromNode(new Rectangle(2, 61, Color.DIMGREY))
+									.buildAndAttach(getGameWorld());
+							j += 60;
+						}
+						i += 60;
+					}
+//					grid = Entities.builder().at(0, 0).viewFromTexture("grid.png").buildAndAttach(getGameWorld());
+					gridState = true;
+				} else {
+					grid.removeFromWorld();
+					gridState = false;
+				}
+			}
+
+		}, KeyCode.F);
+
+//		input.addAction(new UserAction("Hide grid") {
 //			@Override
 //			protected void onAction() {
-//				if (x1 >= x) {
-//					player.setViewFromTexture("right_character.png");
+//				for (int i = 1920 - 1; i >= 0;) {
+//					for (int j = 920 - 1; j >= 0;) {
+//						List<Entity> list = getGameWorld().getEntitiesAt(new Point2D(i, j));
+//						for(Entity e :list) {
+//							if(e.getViewComponent().getEntity().get instanceof Rectangle) {
+//								e.removeFromWorld();
+//							}
+//						}
+////				        getGameWorld().getEntities()(
+////				                tileX,
+////				                tileY)
+////				                .forEach(Entities::destroy);
+//						j -= 40;
+//					}
+//					i -= 40;
 //				}
-//				player.translate(40);
 //			}
-//		}, MouseButton.PRIMARY);
+//
+//		}, KeyCode.H);
 
-		input.addAction(new UserAction("Move Right") {
-			@Override
-			protected void onAction() {
-				player.setViewFromTexture("right_character.png");
-				player.translateX(3); // move right 3 pixels
-				// Utiliser getGamestate pour obtenir le nombre de cases parcouru en faisant
-				// (taille pixel case) / pixel parcouru
-//				getGameState().increment("pixelsMoved", +3);				
-			}
-		}, KeyCode.D);
-
-		input.addAction(new UserAction("Move Left") {
-			@Override
-			protected void onAction() {
-				player.setViewFromTexture("left_character.png");
-				player.translateX(-3); // move left 3 pixels
-//				getGameState().increment("pixelsMoved", +3);
-
-			}
-		}, KeyCode.Q);
-
-		input.addAction(new UserAction("Move Up") {
-			@Override
-			protected void onAction() {
-				player.setViewFromTexture("up_character.png");
-				player.translateY(-3); // move up 3 pixels
-//				getGameState().increment("pixelsMoved", +3);
-
-			}
-		}, KeyCode.Z);
-
-		input.addAction(new UserAction("Move Down") {
-			@Override
-			protected void onAction() {
-				player.setViewFromTexture("down_character.png");
-				player.translateY(3); // move down 3 pixels
-//				getGameState().increment("pixelsMoved", +3);
-
-			}
-		}, KeyCode.S);
 	}
 
 	@Override
 	protected void initUI() {
 		Text textPixels = new Text();
-		Text uiText = new Text("Hello World");
+//		Text uiText = new Text("Hello World");
 		Point2D hotspot = Point2D.ZERO;
 
-		textPixels.setTranslateX(1920 - 800); // x = 50
-		textPixels.setTranslateY(60); // y = 100
-
+//		textPixels.setTranslateX(15); // x = 50
+//		textPixels.setTranslateY(960); // y = 100
 		getGameScene().addUINode(textPixels); // add to the scene graph
 //		textPixels.textProperty().bind(getGameState().intProperty("pixelsMoved").asString());
 
-		Text uiScore = getUIFactory().newText("", Color.RED, 16.0);
+//		Text uiScore = getUIFactory().newText("TEST", Color.RED, 16.0):
+
 		getGameScene().setCursor("cursor.png", hotspot);
-		getGameScene().addUINode(uiText);
+//		getGameScene().addUINode(uiText);
+
+		getGameScene().getContentRoot().setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+
+				int x = (int) event.getSceneX();
+				int y = (int) event.getSceneY();
+				int tab[] = new Click().cases(x, y);
+
+				player.translateX(tab[2] - player.getPosition().getX() - 60 + 10);
+				player.translateY(tab[3] - player.getPosition().getY() - 60 - 10);
+
+				System.out.println("Coordonées" + x + " et " + y);
+				for (int i = 0; i < 4; i++) {
+					System.out.println(tab[i]);
+				}
+			}
+		});
+
+		getGameScene().getContentRoot().setOnMouseMoved(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+
+				int caseCursorX = ((int) event.getSceneX() / 60) -1;
+				int caseCursorY = ((int) event.getSceneY() / 60) -1;
+				int casePlayerX = (int) (player.getPosition().getX() / 60);
+				int casePlayerY = (int) (player.getPosition().getY()) / 60;
+//				System.out.println("Coordonées du tabl (" + tab[2] + " , " + tab[3] + ")");
+//				System.out.println("Coordonées du joueur (" + casePlayerX + " , " + casePlayerY + ")");
+//				System.out.println("Coordonées de la souris (" + xcase + " , " + ycase + ")");
+
+				int x = (int) event.getSceneX();
+				int y = (int) event.getSceneY();
+				int tab[] = new Click().cases(x, y);
+				
+				if ((caseCursorX == casePlayerX) && (caseCursorY == casePlayerY)) {
+					System.out.println("printed !");
+					casesAroundUp = Entities.builder()
+							.at(tab[2] - 30 , tab[3] - 90).viewFromNode(new Rectangle(60, 60, Color.LIGHTGRAY))
+							.buildAndAttach(getGameWorld());
+					
+					casesAroundRight = Entities.builder()
+								.at(tab[2] + 30 , tab[3] - 30).viewFromNode(new Rectangle(60, 60, Color.LIGHTGRAY))
+								.buildAndAttach(getGameWorld());
+					
+					casesAroundDown = Entities.builder()
+							.at(tab[2] - 30 , tab[3] + 30).viewFromNode(new Rectangle(60, 60, Color.LIGHTGRAY))
+							.buildAndAttach(getGameWorld());
+					
+					casesAroundLeft = Entities.builder()
+							.at(tab[2] - 90 , tab[3] - 30).viewFromNode(new Rectangle(60, 60, Color.LIGHTGRAY))
+							.buildAndAttach(getGameWorld());
+				} 
+				
+//				else {
+//					casesAroundDown.removeFromWorld();
+//					casesAroundLeft.removeFromWorld();
+//					casesAroundRight.removeFromWorld();
+//					casesAroundUp.removeFromWorld();
+//				}
+			}
+		});
+//		Text fenetre = new Text("Ma fenetre");
+//		fenetre.setTranslateX(15);
+//		fenetre.setTranslateY(940);
+//		
+//		getGameScene().addUINode(fenetre);
 	}
 
 //	@Override
@@ -149,4 +228,5 @@ public class BasicGameApp extends GameApplication {
 	public static void main(String[] args) {
 		launch(args);
 	}
+
 }
